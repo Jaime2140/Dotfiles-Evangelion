@@ -1,0 +1,248 @@
+@define-color cc-bg rgba(32, 17, 61, 0.85);
+@define-color purple-base #8a5ef0;
+@define-color purple-dark #2d1659;
+@define-color text-color #e0e0e0;
+@define-color border-green #76ff03;
+@define-color purple-accent #3e2473;
+
+* {
+  font-family: "JetBrainsMono Nerd Font", monospace;
+  border-radius: 0;
+}
+
+.control-center .notification-row:focus,
+.control-center .notification-row:hover {
+  opacity: 1;
+  background: @purple-dark;
+}
+
+.notification-row {
+  outline: none;
+  margin: 0;
+  padding: 0;
+}
+
+.notification,
+.notification-content,
+.notification-action,
+.notification-default-action,
+.inline-reply-entry,
+.inline-reply-button,
+.widget-title,
+.widget-title>button,
+.widget-dnd,
+.widget-dnd>switch,
+.widget-dnd>switch slider,
+.widget-label>label,
+.widget-buttons-grid,
+.widget-buttons-grid>flowbox>flowboxchild>button,
+.widget-volume,
+.widget-backlight,
+.widget-mpris,
+.widget-mpris>box>button,
+.widget-mpris-player,
+.widget-mpris-album-art {
+  border-radius: 0;
+}
+
+.notification {
+  background: @cc-bg;
+  border: 2px solid @purple-accent;
+  margin: 3px -2px 3px 0;
+  min-height: 80px;
+}
+
+.close-button {
+  background: @purple-base;
+  color: @cc-bg;
+  text-shadow: none;
+  padding: 0;
+  margin-top: 5px;
+  margin-right: 5px;
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+  border-radius: 0;
+  border: none;
+}
+
+.notification:hover .close-button {
+  opacity: 1;
+}
+
+.close-button:hover {
+  background: @purple-base;
+  box-shadow: none;
+  transition: all 0.15s ease-in-out;
+}
+
+.notification-action {
+  border: 2px solid @purple-accent;
+}
+
+.notification-default-action:hover,
+.notification-action:hover {
+  color: @purple-accent;
+  background: @cc-bg;
+}
+
+.inline-reply-entry {
+  background: @purple-dark;
+  color: @text-color;
+  caret-color: @text-color;
+  border: 1px solid @purple-base;
+}
+
+.inline-reply-button {
+  margin-top: 4px;
+  margin-left: 4px;
+  background: @purple-base;
+  border: 1px solid @purple-base;
+  color: @text-color;
+}
+
+.inline-reply-button:disabled {
+  background: transparent;
+  color: @purple-base;
+  border: 1px solid transparent;
+}
+
+.inline-reply-button:hover {
+  background: @purple-base;
+}
+
+.summary {
+  font-size: 16px;
+  font-weight: 700;
+  background: transparent;
+  color: @border-green;
+  text-shadow: none;
+}
+
+.time {
+  font-size: 16px;
+  font-weight: 700;
+  background: transparent;
+  color: @text-color;
+  text-shadow: none;
+  margin-right: 18px;
+}
+
+.body {
+  font-size: 15px;
+  font-weight: 400;
+  background: transparent;
+  color: @text-color;
+  text-shadow: none;
+}
+
+.control-center {
+  background: @cc-bg;
+  border: 3px solid @purple-accent;
+}
+
+.widget-title {
+  color: @border-green;
+  background: @purple-dark;
+  padding: 5px 10px;
+  margin: 10px;
+  font-size: 1rem;
+}
+
+.widget-title>button {
+  font-size: 1rem;
+  color: @text-color;
+  background: @purple-base;
+  box-shadow: none;
+}
+
+.widget-title>button:hover {
+  background: @purple-base;
+  color: @cc-bg;
+}
+
+.widget-dnd {
+  background: @purple-dark;
+  padding: 5px 10px;
+  margin: 5px 10px;
+  font-size: large;
+  color: @border-green;
+}
+
+.widget-dnd>switch {
+  background: @border-green;
+  border-radius: 0;
+}
+
+.widget-dnd>switch:checked {
+  background: @purple-base;
+  border: 1px solid @purple-base;
+}
+
+.widget-label>label {
+  font-size: 1rem;
+  color: @text-color;
+  margin: 10px;
+}
+
+.widget-buttons-grid {
+  font-size: x-large;
+  padding: 5px;
+  margin: 0px 10px 10px 10px;
+  background: @purple-dark;
+}
+
+.widget-buttons-grid>flowbox>flowboxchild>button {
+  margin: 3px;
+  padding: 4px 30px;
+  background: @cc-bg;
+  color: @text-color;
+  transition: background-color 0.15s ease-in-out;
+}
+
+.widget-buttons-grid>flowbox>flowboxchild>button:hover {
+  background: @border-green;
+  color: @cc-bg;
+}
+
+.widget-buttons-grid>flowbox>flowboxchild>button:checked {
+  background: @purple-base;
+  color: @cc-bg;
+}
+
+.widget-volume,
+.widget-backlight {
+  background: @purple-dark;
+  padding: 5px;
+  margin: 5px 10px;
+  font-size: 2rem;
+  color: @border-green;
+}
+
+.widget-mpris {
+  color: @text-color;
+  background: @purple-dark;
+  margin: 0px 10px 10px 10px;
+  box-shadow: none;
+}
+
+.widget-mpris>box>button,
+.widget-mpris-player,
+.widget-mpris-album-art {
+  border-radius: 0;
+  box-shadow: none;
+  margin: 10px;
+}
+
+picture.mpris-background {
+  opacity: 0;
+}
+
+.notification-action>button {
+  color: @text-color;
+  border-radius: 0px;
+}
+
+.notification-action>button:hover {
+  background-color: @border-green;
+  color: @cc-bg;
+}
