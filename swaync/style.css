@@ -102,7 +102,9 @@ row:active {
   background: @purple-dark;
   border: 2px solid @purple-accent;
   margin: 4px 10px; 
+  padding: 2px;
   min-height: 80px;
+  min-width: 460px;
   box-shadow: none;
   transition: all 0.2s ease-in-out;
 }
@@ -237,13 +239,16 @@ row:active {
 .widget-buttons-grid > flowbox > flowboxchild:nth-child(1) > button:hover { background-image: url("./icons/exit_hover.png"); }
 
 .widget-buttons-grid > flowbox > flowboxchild:nth-child(2) > button { background-image: url("./icons/mic.png"); }
-.widget-buttons-grid > flowbox > flowboxchild:nth-child(2) > button:hover { background-image: url("./icons/mic_hover.png"); }
+.widget-buttons-grid > flowbox > flowboxchild:nth-child(2) > button:hover,
+.widget-buttons-grid > flowbox > flowboxchild:nth-child(2) > button:checked { background-image: url("./icons/mic_hover.png"); }
 
 .widget-buttons-grid > flowbox > flowboxchild:nth-child(3) > button { background-image: url("./icons/wifi.png"); }
-.widget-buttons-grid > flowbox > flowboxchild:nth-child(3) > button:hover { background-image: url("./icons/wifi_hover.png"); }
+.widget-buttons-grid > flowbox > flowboxchild:nth-child(3) > button:hover,
+.widget-buttons-grid > flowbox > flowboxchild:nth-child(3) > button:checked { background-image: url("./icons/wifi_hover.png"); }
 
 .widget-buttons-grid > flowbox > flowboxchild:nth-child(4) > button { background-image: url("./icons/bluetooth.png"); }
-.widget-buttons-grid > flowbox > flowboxchild:nth-child(4) > button:hover { background-image: url("./icons/bluetooth_hover.png"); }
+.widget-buttons-grid > flowbox > flowboxchild:nth-child(4) > button:hover,
+.widget-buttons-grid > flowbox > flowboxchild:nth-child(4) > button:checked { background-image: url("./icons/bluetooth_hover.png"); }
 
 .widget-buttons-grid > flowbox > flowboxchild:nth-child(5) > button { background-image: url("./icons/record.png"); }
 .widget-buttons-grid > flowbox > flowboxchild:nth-child(5) > button:hover { background-image: url("./icons/record_hover.png"); }

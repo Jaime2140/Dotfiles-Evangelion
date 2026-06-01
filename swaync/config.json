@@ -55,15 +55,20 @@
         {
           "label": "󰍬",
           "command": "pactl set-source-mute @DEFAULT_SOURCE@ toggle",
-          "type": "toggle"
+          "type": "toggle",
+          "update-command": "bash -c 'LC_ALL=C pactl get-source-mute @DEFAULT_SOURCE@ | grep -q yes && echo false || echo true'"
         },
         {
           "label": "󰖩",
-          "command": "rfkill toggle wifi"
+          "command": "rfkill toggle wifi",
+          "type": "toggle",
+          "update-command": "bash -c 'LC_ALL=C rfkill list wifi | grep -q yes && echo false || echo true'"
         },
         {
           "label": "󰂯",
-          "command": "rfkill toggle bluetooth"
+          "command": "rfkill toggle bluetooth",
+          "type": "toggle",
+          "update-command": "bash -c 'LC_ALL=C rfkill list bluetooth | grep -q yes && echo false || echo true'"
         },
         {
           "label": "",

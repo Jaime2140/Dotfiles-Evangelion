@@ -2,4 +2,5 @@
 *.log
 *.tmp
 node_modules/
+sync.sh
 *~
