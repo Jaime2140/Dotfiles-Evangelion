@@ -8,31 +8,47 @@ window {
 button {
     background-repeat: no-repeat;
     background-position: center;
-    background-size: 20%;
-    color:  #ffffff;
+    background-size: 97%;
+    color: transparent;
     background-color: transparent;
     animation: gradient_f 20s ease-in infinite;
     transition: all 0.2s ease;
-    box-shadow: 0 0 10px 2px transparent;
+    
+    border: none;
+    box-shadow: none;
     border-radius: 0px;
-    margin: 10px;
+    
+    min-width: 256px;
+    min-height: 256px;
 
-    min-width: 150px;
+    margin: 0px;
+
+    margin-left: -60px;
 }
 
 button:focus {
     box-shadow: none;
-    background-size : 20%;
+    background-size: 97%;
 }
 
 button:hover {
-    background-size: 35%;
-    box-shadow: 0 0 15px rgba(118, 255, 3, 0.2);
-    background-color: #3e2473;
-    border: 2px solid #76ff03;
-    color: #76ff03;
-    transition: all 0.3s cubic-bezier(.55, 0.0, .28, 1.682), box-shadow 0.5s ease-in;
+    background-size: 100%;
+    background-color: transparent;
+    border: none;
+    color: transparent;
+    transition: all 0.3s cubic-bezier(.55, 0.0, .28, 1.682);
 }
+
+#logout, #suspend {
+    margin-top: 130px; 
+}
+
+#lock, #shutdown, #reboot {
+    margin-bottom: 130px; 
+}
+
+#suspend { background-image: image(url("./icons/suspend.png")); }
+#suspend:hover { background-image: image(url("./icons/suspend_hover.png")); }
 
 #shutdown { background-image: image(url("./icons/shutdown.png")); }
 #shutdown:hover { background-image: image(url("./icons/shutdown_hover.png")); }
@@ -45,6 +61,3 @@ button:hover {
 
 #lock { background-image: image(url("./icons/lock.png")); }
 #lock:hover { background-image: image(url("./icons/lock_hover.png")); }
-
-#suspend { background-image: image(url("./icons/suspend.png")); }
-#suspend:hover { background-image: image(url("./icons/suspend_hover.png")); }
