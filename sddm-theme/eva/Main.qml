@@ -1,9 +1,3 @@
-/**
- * Pixie SDDM
- * A minimal SDDM theme inspired by Pixel UI and Material Design 3.
- * Author: xCaptaiN09
- * GitHub: https://github.com/xCaptaiN09/pixie-sddm
- */
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
@@ -229,9 +223,9 @@ Rectangle {
         }
     }
 
-    FontLoader { id: fontRegular; source: "assets/fonts/FlexRounded-R.ttf" }
-    FontLoader { id: fontMedium; source: "assets/fonts/FlexRounded-M.ttf" }
-    FontLoader { id: fontBold; source: "assets/fonts/FlexRounded-B.ttf" }
+    Item { id: fontRegular; property string name: "JetBrainsMono Nerd Font" }
+    Item { id: fontMedium;  property string name: "JetBrainsMono Nerd Font" }
+    Item { id: fontBold;    property string name: "JetBrainsMono Nerd Font" }
 
     Image {
         id: backgroundImage
@@ -296,7 +290,7 @@ Rectangle {
         text: Qt.formatDateTime(new Date(), "dddd, MMMM d")
         color: container.extractedAccent
         font.pixelSize: 22
-        font.family: fontRegular.name
+        font.family: fontBold.name
         anchors {
             top: parent.top
             left: parent.left
@@ -319,7 +313,7 @@ Rectangle {
             anchors.centerIn: parent
             backgroundSource: config.background
             baseAccent: container.extractedAccent
-            fontFamily: fontRegular.name
+            fontFamily: fontBold.name
             opacity: container.uiReady ? 1 : 0
             Behavior on opacity { NumberAnimation { duration: 300 } }
         }
@@ -370,194 +364,124 @@ Rectangle {
         Rectangle {
             id: loginCard
             width: 380
-            // Dynamic height: Expands smoothly when NumLock text appears
-            height: 480 + (numLockIndicator.visible ? 40 : 0)
+            height: 580 + (numLockIndicator.visible ? 40 : 0)
             x: (parent.width - width) / 2
-            y: (parent.height - 480) / 2
-            color: loginState.isError ? "#442222" : baseColor
-            opacity: 0.7
-            radius: 32
-
-            Behavior on color { ColorAnimation { duration: 200 } }
-            // Beautiful MD3 bounce/jiggle animation when card resizes
-            Behavior on height { NumberAnimation { duration: 300; easing.type: Easing.InOutQuad } }
-            // Also animate Y position so it stays perfectly centered when height changes
-            Behavior on y { NumberAnimation { duration: 300; easing.type: Easing.OutBack } }
+            y: (parent.height - height) / 2
+            
+            color: "transparent"
+            border.color: container.extractedAccent
+            border.width: 1
+            radius: 0
+            opacity: 1.0
 
             ColumnLayout {
                 anchors.fill: parent
                 anchors.margins: 40
-                spacing: 15
+                spacing: 12
 
                 Item {
-                    Layout.preferredWidth: 120
-                    Layout.preferredHeight: 120
+                    Layout.preferredWidth: 160
+                    Layout.preferredHeight: 160
                     Layout.alignment: Qt.AlignHCenter
 
                     Rectangle {
                         id: avatarFallback
                         anchors.fill: parent
-                        color: surfaceColor
-                        radius: width / 2
+                        color: "transparent"
+                        border.color: container.extractedAccent
+                        border.width: 0
                         visible: avatar.status !== Image.Ready
-
                         Text {
                             anchors.centerIn: parent
-                            text: {
-                                var n = "";
-                                if (typeof userModel !== "undefined" && userModel.count > 0) {
-                                    var d = userModel.data(userModel.index(container.userIndex, 0), Qt.DisplayRole);
-                                    var nr = userModel.data(userModel.index(container.userIndex, 0), Qt.UserRole + 1);
-                                    n = d ? d.toString() : (nr ? nr.toString() : "U");
-                                } else {
-                                    n = sddm.lastUser ? sddm.lastUser : "U";
-                                }
-                                return n.charAt(0).toUpperCase();
-                            }
+                            text: "U"
                             color: container.extractedAccent
                             font.pixelSize: 48
-                            font.family: fontBold.name
-                            font.weight: Font.Bold
                         }
                     }
 
-                    // Bulletproof Circular Avatar (Canvas method)
                     Canvas {
                         id: avatarCanvas
                         anchors.fill: parent
                         visible: avatar.status === Image.Ready
-
                         onPaint: {
                             var ctx = getContext("2d");
                             ctx.reset();
+                            
+                            var cx = width / 2;
+                            var cy = height / 2;
+                            var r = width / 2; 
+                            
                             ctx.beginPath();
-                            ctx.arc(width/2, height/2, width/2, 0, 2 * Math.PI);
+                            for (var i = 0; i < 6; i++) {
+                                var angle = i * (Math.PI / 3);
+                                var pX = cx + r * Math.cos(angle);
+                                var pY = cy + r * Math.sin(angle);
+                                
+                                if (i === 0) {
+                                    ctx.moveTo(pX, pY);
+                                } else {
+                                    ctx.lineTo(pX, pY);
+                                }
+                            }
                             ctx.closePath();
+                            
                             ctx.clip();
                             ctx.drawImage(avatar, 0, 0, width, height);
-                            console.log("Pixie SDDM: Canvas draw complete.");
+                            
+                            ctx.lineWidth = 4;
+                            ctx.strokeStyle = container.extractedAccent;
+                            ctx.stroke();
                         }
-
+                        
                         Timer {
                             id: repaintTimer
                             interval: 500
                             onTriggered: avatarCanvas.requestPaint()
                         }
-
+                        
                         Image {
                             id: avatar
                             anchors.fill: parent
                             fillMode: Image.PreserveAspectCrop
                             smooth: true
                             visible: false
-
-                            Component.onCompleted: {
-                                var s = Qt.resolvedUrl("assets/avatar.jpg");
-                                if (typeof userModel !== "undefined" && userModel.count > 0) {
-                                    var icon = userModel.data(userModel.index(container.userIndex, 0), Qt.UserRole + 3);
-                                    if (icon && icon.toString().match(/\.(jpg|jpeg|png|bmp|webp|svg)$/i)) {
-                                        s = icon.toString();
-                                    }
-                                }
-                                source = s;
-                            }
-
-                            onStatusChanged: {
-                                if (status === Image.Ready) {
-                                    console.log("Pixie SDDM: Image ready, repainting Canvas.");
-                                    repaintTimer.start();
-                                }
-                            }
+                            Component.onCompleted: source = Qt.resolvedUrl("assets/avatar.jpg");
+                            onStatusChanged: if (status === Image.Ready) repaintTimer.start();
                         }
                     }
                 }
 
-                Item {
-                    Layout.alignment: Qt.AlignHCenter
-                    Layout.preferredWidth: userNameLabel.width + 40
-                    Layout.preferredHeight: userNameLabel.height + 20
-                    Layout.topMargin: 10
+                Item { Layout.preferredHeight: 10 }
 
-                    Rectangle {
-                        anchors.fill: parent
-                        color: "white"
-                        opacity: userClickArea.pressed ? 0.2 : 0
-                        radius: 12
-                        Behavior on opacity { NumberAnimation { duration: 100 } }
-                    }
-
-                    Text {
-                        id: userNameLabel
-                        anchors.centerIn: parent
-                        text: {
-                            if (typeof userModel !== "undefined" && userModel.count > 0) {
-                                var idx = container.userIndex;
-                                var modelIdx = userModel.index(idx, 0);
-                                var display = userModel.data(modelIdx, Qt.DisplayRole);
-                                var edit = userModel.data(modelIdx, Qt.EditRole);
-                                var nr = userModel.data(modelIdx, Qt.UserRole + 1);
-                                var realName = userModel.data(modelIdx, Qt.UserRole + 2);
-                                var finalName = display ? display.toString() : (realName ? realName.toString() : (nr ? nr.toString() : (edit ? edit.toString() : "User")));
-                                return cleanName(finalName) + (userModel.count > 1 ? " ▾" : "");
-                            }
-                            return cleanName(sddm.lastUser ? sddm.lastUser : "User");
-                        }
-                        color: "white"
-                        font.pixelSize: 24
-                        font.weight: Font.Bold
-                        font.family: fontRegular.name
-                    }
-
-                    MouseArea {
-                        id: userClickArea
-                        anchors.fill: parent
-                        onClicked: userPopup.open()
-                    }
-
-                    scale: userClickArea.pressed ? 0.95 : 1.0
-                    Behavior on scale { NumberAnimation { duration: 100 } }
+                Text {
+                    text: "> SESSION"
+                    color: container.extractedAccent
+                    font.pixelSize: 12
+                    font.family: fontBold.name
+                    Layout.alignment: Qt.AlignLeft
+                    Layout.topMargin: 5
                 }
 
                 Rectangle {
                     id: sessionPill
                     Layout.alignment: Qt.AlignHCenter
-                    Layout.preferredWidth: 180
+                    Layout.preferredWidth: parent.width
                     Layout.preferredHeight: 36
-                    color: (sessionClickArea.pressed || sessionPopup.opened) ? surfaceVariantColor : surfaceColor
-                    radius: 18
+                    color: sessionClickArea.pressed ? Qt.rgba(1,1,1,0.1) : "transparent"
                     border.width: 1
-                    border.color: (sessionClickArea.pressed || sessionPopup.opened) ? container.extractedAccent : surfaceVariantColor
-
-                    scale: sessionClickArea.pressed ? 0.95 : 1.0
-                    Behavior on scale { NumberAnimation { duration: 100 } }
+                    border.color: container.extractedAccent
+                    radius: 0
 
                     RowLayout {
                         anchors.centerIn: parent
                         spacing: 8
+                        Text { text: "󰟀"; color: container.extractedAccent; font.pixelSize: 16 }
                         Text {
-                            text: "󰟀"
-                            color: container.extractedAccent
-                            font.pixelSize: 16
-                        }
-                        Text {
-                            text: {
-                                if (typeof sessionModel !== "undefined" && sessionModel.count > 0) {
-                                    var idx = container.sessionIndex;
-                                    var modelIdx = sessionModel.index(idx, 0);
-                                    var n = sessionModel.data(modelIdx, Qt.UserRole + 4);
-                                    var f = sessionModel.data(modelIdx, Qt.UserRole + 2);
-                                    var d = sessionModel.data(modelIdx, Qt.DisplayRole);
-                                    var finalName = n ? n.toString() : (f ? f.toString() : (d ? d.toString() : "Session " + (idx + 1)));
-                                    return cleanName(finalName) + (sessionModel.count > 1 ? " ▾" : "");
-                                }
-                                return "Hyprland";
-                            }
+                            text: "Hyprland"
                             color: "white"
                             font.pixelSize: 13
-                            font.weight: Font.Medium
                         }
                     }
-
                     MouseArea {
                         id: sessionClickArea
                         anchors.fill: parent
@@ -565,81 +489,109 @@ Rectangle {
                     }
                 }
 
+                Text {
+                    text: "> USERNAME"
+                    color: container.extractedAccent
+                    font.pixelSize: 12
+                    font.family: fontBold.name
+                    Layout.alignment: Qt.AlignLeft
+                }
+
+                Rectangle {
+                    Layout.alignment: Qt.AlignHCenter
+                    Layout.preferredWidth: parent.width
+                    Layout.preferredHeight: 36
+                    color: "transparent"
+                    border.width: 1
+                    border.color: container.extractedAccent
+                    radius: 0
+
+                    Text {
+                        id: userNameLabel
+                        text: cleanName(sddm.lastUser ? sddm.lastUser : "Jaime")
+                        color: "white"
+                        font.pixelSize: 16
+                        font.family: fontBold.name
+
+                        anchors.left: parent.left
+                        anchors.verticalCenter: parent.verticalCenter
+                        anchors.leftMargin: 15
+                    }
+                }
+
+                Text {
+                    text: "> PASSWORD"
+                    color: container.extractedAccent
+                    font.pixelSize: 12
+                    font.family: fontBold.name
+                    Layout.alignment: Qt.AlignLeft
+                    horizontalAlignment: Text.AlignLeft
+                    Layout.topMargin: 5
+                }
+
                 TextField {
                     id: passwordField
-                    Layout.topMargin: 30 // Keeps space above it static
                     echoMode: TextInput.Password
-                    Layout.fillWidth: true
-                    horizontalAlignment: Text.AlignHCenter
+                    Layout.preferredWidth: parent.width
+                    Layout.preferredHeight: 36
+                    Layout.alignment: Qt.AlignHCenter
+
+                    horizontalAlignment: Text.AlignLeft
+                    leftPadding: 15
+                    
                     font.pixelSize: 18
                     color: "white"
                     focus: loginState.visible
                     enabled: !container.isLoggingIn
 
                     background: Rectangle {
-                        color: surfaceColor
-                        radius: 16
-                        border.width: parent.activeFocus ? 2 : 0
+                        color: "transparent"
+                        radius: 0
+                        border.width: parent.activeFocus ? 2 : 1
                         border.color: container.extractedAccent
-                        opacity: parent.enabled ? 1.0 : 0.5
                     }
-
-                    Text {
-                        text: "Enter Password"
-                        color: "gray"
-                        font.pixelSize: 16
-                        visible: !parent.text
-                        anchors.centerIn: parent
-                        opacity: 0.5
-                    }
-
                     onAccepted: container.doLogin()
                 }
 
                 Text {
                     id: numLockIndicator
-                    text: "Num Lock is on"
+                    text: "[ NUM LOCK IS ON ]"
                     color: container.extractedAccent
-                    font.pixelSize: 14
-                    font.family: fontRegular.name
-                    font.weight: Font.Medium
+                    font.pixelSize: 12
+                    font.family: fontBold.name
                     Layout.alignment: Qt.AlignHCenter
-                    visible: {
-                        if (typeof keyboard !== "undefined" && typeof keyboard.numLock !== "undefined") return keyboard.numLock;
-                        return false;
-                    }
-                    opacity: visible ? 1 : 0
-                    Behavior on opacity { NumberAnimation { duration: 200 } }
+                    visible: (typeof keyboard !== "undefined" && typeof keyboard.numLock !== "undefined") ? keyboard.numLock : false
                 }
 
-                RoundButton {
+                Button {
                     id: loginButton
                     Layout.alignment: Qt.AlignHCenter
-                    Layout.preferredWidth: 64
-                    Layout.preferredHeight: 64
+                    Layout.preferredWidth: parent.width
+                    Layout.preferredHeight: 40
+                    Layout.topMargin: 15
                     focusPolicy: Qt.NoFocus
                     enabled: !container.isLoggingIn
 
                     contentItem: Text {
-                        text: container.isLoggingIn ? "⋯" : "→"
-                        color: "white"
-                        font.pixelSize: 32
+                        text: container.isLoggingIn ? "[ CONNECTING... ]" : "[ ENTER ]"
+                        color: loginButton.pressed ? "black" : container.extractedAccent
+                        font.pixelSize: 14
+                        font.family: fontBold.name
                         horizontalAlignment: Text.AlignHCenter
                         verticalAlignment: Text.AlignVCenter
                     }
 
                     background: Rectangle {
-                        color: container.isLoggingIn ? surfaceVariantColor : (loginButton.pressed ? Qt.darker(container.extractedAccent, 1.1) : container.extractedAccent)
-                        radius: 32
-                        opacity: container.isLoggingIn ? 0.5 : 1.0
+                        color: loginButton.pressed ? container.extractedAccent : "transparent"
+                        radius: 0
+                        border.width: 1
+                        border.color: container.extractedAccent
                     }
 
-                    onClicked: {
-                        container.doLogin();
-                    }
+                    onClicked: container.doLogin()
                 }
 
-                Item { Layout.fillHeight: true } // ADD THIS LINE HERE AT THE BOTTOM
+                Item { Layout.fillHeight: true }
             }
         }
     }
@@ -737,7 +689,7 @@ Rectangle {
                         }
                         color: isCurrent ? "white" : (hovered ? "#DDDDDD" : "#AAAAAA")
                         font.pixelSize: 15
-                        font.family: fontRegular.name
+                        font.family: fontBold.name
                         horizontalAlignment: Text.AlignHCenter
                         verticalAlignment: Text.AlignVCenter
                         rightPadding: 60
@@ -768,9 +720,9 @@ Rectangle {
         onOpened: sessionList.forceActiveFocus()
         background: Rectangle {
             color: baseColor
-            radius: 24
+            radius: 0
             opacity: 0.95
-            border.color: surfaceVariantColor
+            border.color: container.extractedAccent
             border.width: 1
         }
         enter: Transition { NumberAnimation { property: "opacity"; from: 0; to: 1; duration: 200 } }
@@ -791,7 +743,7 @@ Rectangle {
                 property bool isCurrent: index === sessionList.currentIndex
                 background: Rectangle {
                     color: isCurrent ? surfaceVariantColor : (hovered ? surfaceColor : "transparent")
-                    radius: 12
+                    radius: 0
                     Rectangle {
                         anchors.left: parent.left
                         anchors.verticalCenter: parent.verticalCenter
@@ -799,7 +751,7 @@ Rectangle {
                         width: 4
                         height: isCurrent ? 16 : 0
                         color: container.extractedAccent
-                        radius: 2
+                        radius: 0
                         Behavior on height { NumberAnimation { duration: 150 } }
                     }
                 }
@@ -824,7 +776,7 @@ Rectangle {
                         }
                         color: isCurrent ? "white" : "#AAAAAA"
                         font.pixelSize: 14
-                        font.family: fontRegular.name
+                        font.family: fontBold.name
                         horizontalAlignment: Text.AlignHCenter
                         verticalAlignment: Text.AlignVCenter
                         rightPadding: 60

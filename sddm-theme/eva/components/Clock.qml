@@ -65,7 +65,7 @@ Item {
         spacing: 0
 
         Column {
-            spacing: -130
+            spacing: -70
             Text {
                 text: clock.timeStr.charAt(0)
                 color: clock.smartHoursColor
@@ -89,7 +89,7 @@ Item {
         }
 
         Column {
-            spacing: -130
+            spacing: -70
             Text {
                 text: clock.timeStr.charAt(1)
                 color: clock.smartHoursColor

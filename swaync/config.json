@@ -20,7 +20,7 @@
   "hide-on-clear": false,
   "hide-on-action": true,
   "script-fail-notify": true,
-  "text-empty": "No Notification",
+  "text-empty": "󰍹  // SYSTEM CLEAR // NO NEW ALERTS",
   "scripts": {
     "sound-script": {
       "exec": "paplay ~/.config/swaync/notification.ogg",
@@ -30,9 +30,9 @@
   "widgets": ["title", "buttons-grid", "mpris"],
   "widget-config": {
     "title": {
-      "text": "Notification Center",
+      "text": "SYSTEM // NOTIFICATIONS",
       "clear-all-button": true,
-      "button-text": "󰆴 Clear All"
+      "button-text": "[ PURGE ]"
     },
     "mpris": {
       "blacklist": ["playerctl"],

@@ -8,18 +8,63 @@
 * {
   font-family: "JetBrainsMono Nerd Font", monospace;
   border-radius: 0;
+  outline: none;
 }
 
+/* =======================================
+   OPCIÓN NUCLEAR CONTRA EL FONDO GRIS DE GTK
+   ======================================= */
+row,
+row:focus,
+row:hover,
+row:selected,
+row:active {
+  background: transparent;
+  box-shadow: none;
+  border: none;
+  outline: none;
+}
+
+/* =======================================
+   1. EL MONITOR MAGI (CONTENEDOR PRINCIPAL)
+   ======================================= */
+.control-center {
+  background: @cc-bg; /* El fondo oscuro ahora cubre todo el panel */
+  border: 3px solid @border-green; /* EL MARCO GIGANTE QUE ENCIERRA TODO */
+  box-shadow: 0px 0px 15px rgba(118, 255, 3, 0.15); /* Resplandor táctico exterior */
+}
+
+.blank-window {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+/* =======================================
+   2. REGLAS DE LAS FILAS DE NOTIFICACIÓN
+   ======================================= */
 .control-center .notification-row:focus,
-.control-center .notification-row:hover {
+.control-center .notification-row:hover,
+.control-center .notification-row:focus:hover,
+.notification-row:focus {
   opacity: 1;
-  background: @purple-dark;
+  background: transparent;
+  box-shadow: none;
+  outline: none;
 }
 
 .notification-row {
   outline: none;
   margin: 0;
   padding: 0;
+  box-shadow: none; 
+  background: transparent;
+}
+
+.notification:focus {
+  box-shadow: none;
+  background: @purple-accent;
+  outline: none;
 }
 
 .notification,
@@ -45,13 +90,260 @@
   border-radius: 0;
 }
 
-.notification {
-  background: @cc-bg;
-  border: 2px solid @purple-accent;
-  margin: 3px -2px 3px 0;
-  min-height: 80px;
+/* =======================================
+   3. ESTILO DE NODOS (AHORA FUSIONADOS AL FONDO)
+   ======================================= */
+/* Como el control-center ya tiene el borde, aquí los quitamos todos */
+.widget-title,
+.widget-dnd,
+.widget-buttons-grid,
+.widget-mpris,
+.widget-volume,
+.widget-backlight {
+  background: transparent; /* Dejamos que se vea el fondo oscuro del padre */
+  border: none; /* Adiós a los bordes fragmentados */
+  box-shadow: none;
+  margin: 0px 10px;
+  padding: 10px;
 }
 
+.widget-mpris {
+  padding: 0; 
+}
+
+/* LAS NOTIFICACIONES MANTIENEN SU ASPECTO DE TARJETA */
+.notification {
+  background: @purple-dark;
+  border: 2px solid @purple-accent;
+  margin: 4px 10px; 
+  min-height: 80px;
+  box-shadow: none;
+  transition: all 0.2s ease-in-out;
+}
+
+.notification:hover {
+  border-color: @border-green;
+  box-shadow: 0px 0px 15px rgba(118, 255, 3, 0.2);
+}
+
+/* =======================================
+   4. ELEMENTOS INTERNOS DE LOS NODOS
+   ======================================= */
+
+/* --- Título --- */
+.widget-title {
+  color: @border-green;
+  margin: 0px;
+  padding: 10px 15px;
+  background: @purple-dark;
+  border-bottom: 3px solid @border-green;
+  font-size: 1rem;
+}
+.widget-title > button {
+  font-size: 1rem;
+  color: @text-color;
+  background: transparent;
+  box-shadow: none;
+  border: none;
+  transition: all 0.2s ease-in-out;
+}
+.widget-title > button:hover {
+  color: #ff003c; /* Un rojo neón más agresivo */
+  background: transparent; /* Obligamos a GTK a no dibujar fondos grises */
+  box-shadow: none;
+  text-shadow: 0 0 8px rgba(255, 0, 60, 0.8); /* Brillo radiactivo */
+}
+
+/* --- No Molestar (DND) --- */
+.widget-dnd {
+  font-size: large;
+  color: @border-green;
+}
+.widget-dnd>switch {
+  background: @border-green;
+  border-radius: 0;
+}
+.widget-dnd>switch:checked {
+  background: @purple-base;
+  border: 1px solid @purple-base;
+}
+
+/* --- Textos Generales --- */
+.widget-label>label {
+  font-size: 1rem;
+  color: @text-color;
+  margin: 10px;
+}
+.summary {
+  font-size: 16px;
+  font-weight: 700;
+  background: transparent;
+  color: @border-green;
+  text-shadow: none;
+}
+.time {
+  font-size: 16px;
+  font-weight: 700;
+  background: transparent;
+  color: @text-color;
+  text-shadow: none;
+  margin-right: 18px;
+}
+.body {
+  font-size: 15px;
+  font-weight: 400;
+  background: transparent;
+  color: @text-color;
+  text-shadow: none;
+}
+
+/* =======================================
+   5. PANEL DE BOTONES (PANAL MAGI PERSONALIZADO)
+   ======================================= */
+.widget-buttons-grid {
+  font-size: x-large;
+  margin: 0px 10px;
+  padding: 40px 10px; 
+  padding-left: 30px;
+}
+
+.widget-buttons-grid > flowbox > flowboxchild,
+.widget-buttons-grid > flowbox > flowboxchild:hover,
+.widget-buttons-grid > flowbox > flowboxchild:selected,
+.widget-buttons-grid > flowbox > flowboxchild:focus,
+.widget-buttons-grid > flowbox > flowboxchild:active {
+  background: transparent;
+  box-shadow: none;
+  border: none;
+  outline: none;
+}
+
+/* La caja base del botón */
+.widget-buttons-grid > flowbox > flowboxchild > button {
+  min-width: 90px;
+  min-height: 90px;
+  margin: 0px -10px;
+  padding: 0;
+  
+  background: transparent; 
+  box-shadow: none;
+  border: none; 
+  border-radius: 0;
+  transition: all 0.2s ease-in-out;
+
+  color: transparent; 
+  text-shadow: none;
+  
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.widget-buttons-grid > flowbox > flowboxchild > button:active,
+.widget-buttons-grid > flowbox > flowboxchild > button:hover,
+.widget-buttons-grid > flowbox > flowboxchild > button:checked {
+  background-color: transparent;
+  color: transparent;
+  box-shadow: none;
+  border-color: transparent;
+  text-shadow: none;
+}
+
+/* =======================================
+   LA MAGIA DEL ZIG-ZAG AUTOMÁTICO
+   ======================================= */
+.widget-buttons-grid > flowbox > flowboxchild:nth-child(odd) {
+  margin-top: -20px;
+  margin-bottom: 20px;
+}
+.widget-buttons-grid > flowbox > flowboxchild:nth-child(even) {
+  margin-top: 20px;
+  margin-bottom: -20px;
+}
+
+/* =======================================
+   IMÁGENES INDIVIDUALES DE CADA BOTÓN MAGI
+   ======================================= */
+.widget-buttons-grid > flowbox > flowboxchild:nth-child(1) > button { background-image: url("./icons/exit.png"); }
+.widget-buttons-grid > flowbox > flowboxchild:nth-child(1) > button:hover { background-image: url("./icons/exit_hover.png"); }
+
+.widget-buttons-grid > flowbox > flowboxchild:nth-child(2) > button { background-image: url("./icons/mic.png"); }
+.widget-buttons-grid > flowbox > flowboxchild:nth-child(2) > button:hover { background-image: url("./icons/mic_hover.png"); }
+
+.widget-buttons-grid > flowbox > flowboxchild:nth-child(3) > button { background-image: url("./icons/wifi.png"); }
+.widget-buttons-grid > flowbox > flowboxchild:nth-child(3) > button:hover { background-image: url("./icons/wifi_hover.png"); }
+
+.widget-buttons-grid > flowbox > flowboxchild:nth-child(4) > button { background-image: url("./icons/bluetooth.png"); }
+.widget-buttons-grid > flowbox > flowboxchild:nth-child(4) > button:hover { background-image: url("./icons/bluetooth_hover.png"); }
+
+.widget-buttons-grid > flowbox > flowboxchild:nth-child(5) > button { background-image: url("./icons/record.png"); }
+.widget-buttons-grid > flowbox > flowboxchild:nth-child(5) > button:hover { background-image: url("./icons/record_hover.png"); }
+
+/* =======================================
+   RESTO DE WIDGETS
+   ======================================= */
+
+/* --- Sliders de Volumen/Brillo --- */
+.widget-volume,
+.widget-backlight {
+  font-size: 2rem;
+  color: @border-green;
+}
+
+/* --- Reproductor de Música (MPRIS) --- */
+
+.widget-mpris,
+.widget-mpris > box,
+.widget-mpris-player,
+.widget-mpris-player > box,
+.widget-mpris-player > box > box {
+  background: transparent;
+  background-color: transparent;
+  box-shadow: none;
+}
+
+.widget-mpris {
+  color: @text-color;
+  margin-top: -45px;
+  margin-bottom: -20px;
+  margin-left: 10px;
+  margin-right: 10px;      
+  padding: 10px 0px;
+}
+
+/* La caja principal del reproductor */
+.widget-mpris-player {
+  border-radius: 0;
+  margin: 0;
+}
+
+/* El marco verde táctico para la portada del álbum */
+.widget-mpris-album-art {
+  border-radius: 0;
+  box-shadow: none;
+  border: none; 
+  margin: 10px;
+}
+
+/* Botones de control (Play/Pause, etc.) */
+.widget-mpris-player > box > button {
+  border-radius: 0;
+  box-shadow: none;
+  color: @text-color;
+  background: transparent;
+}
+
+.widget-mpris-player > box > button:hover {
+  color: @border-green;
+  background: transparent;
+  text-shadow: 0 0 10px rgba(118, 255, 3, 0.8);
+}
+
+picture.mpris-background {
+  opacity: 0;
+}
+
+/* --- Acciones y Botones de Notificación --- */
 .close-button {
   background: @purple-base;
   color: @cc-bg;
@@ -64,34 +356,35 @@
   border-radius: 0;
   border: none;
 }
-
 .notification:hover .close-button {
   opacity: 1;
 }
-
 .close-button:hover {
   background: @purple-base;
   box-shadow: none;
   transition: all 0.15s ease-in-out;
 }
-
 .notification-action {
   border: 2px solid @purple-accent;
 }
-
+.notification-action>button {
+  color: @text-color;
+  border-radius: 0px;
+}
 .notification-default-action:hover,
-.notification-action:hover {
+.notification-action:hover,
+.notification-action>button:hover {
   color: @purple-accent;
-  background: @cc-bg;
+  background: @purple-accent;
 }
 
+/* --- Respuestas Rápidas (Inline Reply) --- */
 .inline-reply-entry {
   background: @purple-dark;
   color: @text-color;
   caret-color: @text-color;
   border: 1px solid @purple-base;
 }
-
 .inline-reply-button {
   margin-top: 4px;
   margin-left: 4px;
@@ -99,150 +392,30 @@
   border: 1px solid @purple-base;
   color: @text-color;
 }
-
 .inline-reply-button:disabled {
   background: transparent;
   color: @purple-base;
   border: 1px solid transparent;
 }
-
 .inline-reply-button:hover {
   background: @purple-base;
 }
 
-.summary {
-  font-size: 16px;
-  font-weight: 700;
+/* =======================================
+   ESTILO DE LA BARRA DE DESPLAZAMIENTO
+   ======================================= */
+scrollbar {
   background: transparent;
-  color: @border-green;
-  text-shadow: none;
+  width: 4px;
 }
 
-.time {
-  font-size: 16px;
-  font-weight: 700;
-  background: transparent;
-  color: @text-color;
-  text-shadow: none;
-  margin-right: 18px;
-}
-
-.body {
-  font-size: 15px;
-  font-weight: 400;
-  background: transparent;
-  color: @text-color;
-  text-shadow: none;
-}
-
-.control-center {
-  background: @cc-bg;
-  border: 3px solid @purple-accent;
-}
-
-.widget-title {
-  color: @border-green;
-  background: @purple-dark;
-  padding: 5px 10px;
-  margin: 10px;
-  font-size: 1rem;
-}
-
-.widget-title>button {
-  font-size: 1rem;
-  color: @text-color;
-  background: @purple-base;
-  box-shadow: none;
-}
-
-.widget-title>button:hover {
-  background: @purple-base;
-  color: @cc-bg;
-}
-
-.widget-dnd {
-  background: @purple-dark;
-  padding: 5px 10px;
-  margin: 5px 10px;
-  font-size: large;
-  color: @border-green;
-}
-
-.widget-dnd>switch {
+scrollbar slider {
   background: @border-green;
-  border-radius: 0;
-}
-
-.widget-dnd>switch:checked {
-  background: @purple-base;
-  border: 1px solid @purple-base;
-}
-
-.widget-label>label {
-  font-size: 1rem;
-  color: @text-color;
-  margin: 10px;
-}
-
-.widget-buttons-grid {
-  font-size: x-large;
-  padding: 5px;
-  margin: 0px 10px 10px 10px;
-  background: @purple-dark;
-}
-
-.widget-buttons-grid>flowbox>flowboxchild>button {
-  margin: 3px;
-  padding: 4px 30px;
-  background: @cc-bg;
-  color: @text-color;
-  transition: background-color 0.15s ease-in-out;
-}
-
-.widget-buttons-grid>flowbox>flowboxchild>button:hover {
-  background: @border-green;
-  color: @cc-bg;
-}
-
-.widget-buttons-grid>flowbox>flowboxchild>button:checked {
-  background: @purple-base;
-  color: @cc-bg;
-}
-
-.widget-volume,
-.widget-backlight {
-  background: @purple-dark;
-  padding: 5px;
-  margin: 5px 10px;
-  font-size: 2rem;
-  color: @border-green;
-}
-
-.widget-mpris {
-  color: @text-color;
-  background: @purple-dark;
-  margin: 0px 10px 10px 10px;
-  box-shadow: none;
-}
-
-.widget-mpris>box>button,
-.widget-mpris-player,
-.widget-mpris-album-art {
-  border-radius: 0;
-  box-shadow: none;
-  margin: 10px;
-}
-
-picture.mpris-background {
-  opacity: 0;
-}
-
-.notification-action>button {
-  color: @text-color;
   border-radius: 0px;
+  min-height: 30px;
 }
 
-.notification-action>button:hover {
-  background-color: @border-green;
-  color: @cc-bg;
+scrollbar slider:hover {
+  background: white;
+  box-shadow: 0 0 10px @border-green;
 }
