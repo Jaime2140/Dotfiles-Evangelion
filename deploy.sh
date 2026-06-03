@@ -5,7 +5,6 @@ REPO_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 echo "Iniciando despliegue táctico en el nuevo sistema..."
 echo "---------------------------------------------------"
 
-# Diccionario Inverso: ["Carpeta en tu GitHub"]="Ruta destino en la nueva PC"
 declare -A carpetas=(
     ["fastfetch"]="$HOME/.config/fastfetch"
     ["hypr"]="$HOME/.config/hypr"
@@ -14,6 +13,8 @@ declare -A carpetas=(
     ["swaync"]="$HOME/.config/swaync"
     ["waybar"]="$HOME/.config/waybar"
     ["wlogout"]="$HOME/.config/wlogout"
+    ["qt5ct"]="$HOME/.config/qt5ct"
+    ["qt6ct"]="$HOME/.config/qt6ct"
     ["gtk-theme/Eva"]="$HOME/.themes/Eva"
     ["sddm-theme/eva"]="/usr/share/sddm/themes/eva"
 )
@@ -47,4 +48,5 @@ echo "1. Fuentes: sudo pacman -S ttf-jetbrains-mono-nerd"
 echo "2. Iconos base: sudo pacman -S papirus-icon-theme"
 echo "3. Script de color: yay -S papirus-folders"
 echo "4. Aplicar morado: papirus-folders -C violet --theme Papirus-Dark"
+echo "5. Entorno Qt: sudo pacman -S qt5ct qt6ct"
 echo "---------------------------------------------------"
