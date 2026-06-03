@@ -6,15 +6,8 @@ echo "Iniciando despliegue táctico en el nuevo sistema..."
 echo "---------------------------------------------------"
 
 declare -A carpetas=(
-    ["fastfetch"]="$HOME/.config/fastfetch"
     ["hypr"]="$HOME/.config/hypr"
-    ["kitty"]="$HOME/.config/kitty"
-    ["rofi"]="$HOME/.config/rofi"
-    ["swaync"]="$HOME/.config/swaync"
-    ["waybar"]="$HOME/.config/waybar"
-    ["wlogout"]="$HOME/.config/wlogout"
-    ["qt5ct"]="$HOME/.config/qt5ct"
-    ["qt6ct"]="$HOME/.config/qt6ct"
+    ["themes"]="$HOME/.config/themes"
     ["gtk-theme/Eva"]="$HOME/.themes/Eva"
     ["sddm-theme/eva"]="/usr/share/sddm/themes/eva"
 )
@@ -25,7 +18,6 @@ for repo_folder in "${!carpetas[@]}"; do
     
     if [ -d "$origen" ]; then
         echo "[ OK ] Instalando: $repo_folder -> $destino"
-        
         padre="$(dirname "$destino")"
         
         if [[ "$destino" == /usr/share/* ]]; then
@@ -37,6 +29,18 @@ for repo_folder in "${!carpetas[@]}"; do
         fi
     else
         echo "[ WARN ] Carpeta no encontrada en el repositorio: $repo_folder"
+    fi
+done
+
+echo "---------------------------------------------------"
+echo "Reconstruyendo enlaces simbólicos del tema base..."
+apps_espejo=("fastfetch" "kitty" "qt5ct" "qt6ct" "rofi" "swaync" "waybar" "wlogout")
+
+for app in "${apps_espejo[@]}"; do
+    if [ -d "$HOME/.config/themes/Eva/$app" ]; then
+        rm -rf "$HOME/.config/$app"
+        ln -s "$HOME/.config/themes/Eva/$app" "$HOME/.config/$app"
+        echo "[ OK ] Espejo conectado: $app"
     fi
 done
 
