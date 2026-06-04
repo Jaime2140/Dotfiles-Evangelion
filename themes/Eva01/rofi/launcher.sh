@@ -1,0 +1,1 @@
+rofi -show drun -theme ~/.config/rofi/Eva01.rasi

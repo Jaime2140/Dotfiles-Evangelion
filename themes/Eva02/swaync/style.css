@@ -1,0 +1,405 @@
+@define-color cc-bg rgba(21, 9, 9, 0.85);
+@define-color color-base #d62828;
+@define-color color-dark #1a0f0f;
+@define-color text-color #f2e6e6;
+@define-color border-accent #ff8800;
+@define-color color-accent #4a1c1c;
+
+* {
+  font-family: "JetBrainsMono Nerd Font", monospace;
+  border-radius: 0;
+  outline: none;
+}
+
+row,
+row:focus,
+row:hover,
+row:selected,
+row:active {
+  background: transparent;
+  box-shadow: none;
+  border: none;
+  outline: none;
+}
+
+.control-center {
+  background: @cc-bg;
+  border: 3px solid @border-accent;
+  box-shadow: 0px 0px 15px rgba(255, 136, 0, 0.15);
+}
+
+.blank-window {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+.control-center .notification-row:focus,
+.control-center .notification-row:hover,
+.control-center .notification-row:focus:hover,
+.notification-row:focus {
+  opacity: 1;
+  background: transparent;
+  box-shadow: none;
+  outline: none;
+}
+
+.notification-row {
+  outline: none;
+  margin: 0;
+  padding: 0;
+  box-shadow: none; 
+  background: transparent;
+}
+
+.notification:focus {
+  box-shadow: none;
+  background: @color-accent;
+  outline: none;
+}
+
+.notification,
+.notification-content,
+.notification-action,
+.notification-default-action,
+.inline-reply-entry,
+.inline-reply-button,
+.widget-title,
+.widget-title>button,
+.widget-dnd,
+.widget-dnd>switch,
+.widget-dnd>switch slider,
+.widget-label>label,
+.widget-buttons-grid,
+.widget-buttons-grid>flowbox>flowboxchild>button,
+.widget-volume,
+.widget-backlight,
+.widget-mpris,
+.widget-mpris>box>button,
+.widget-mpris-player,
+.widget-mpris-album-art {
+  border-radius: 0;
+}
+
+.widget-title,
+.widget-dnd,
+.widget-buttons-grid,
+.widget-mpris,
+.widget-volume,
+.widget-backlight {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  margin: 0px 10px;
+  padding: 10px;
+}
+
+.widget-mpris {
+  padding: 0; 
+}
+
+.notification {
+  background: @color-dark;
+  border: 2px solid @color-accent;
+  margin: 4px 10px; 
+  padding: 2px;
+  min-height: 80px;
+  min-width: 460px;
+  box-shadow: none;
+  transition: all 0.2s ease-in-out;
+}
+
+.notification:hover {
+  border-color: @border-accent;
+  box-shadow: 0px 0px 15px rgba(255, 136, 0, 0.2);
+}
+
+.widget-title {
+  color: @border-accent;
+  margin: 0px;
+  padding: 10px 15px;
+  background: @color-dark;
+  border-bottom: 3px solid @border-accent;
+  font-size: 1rem;
+}
+.widget-title > button {
+  font-size: 1rem;
+  color: @text-color;
+  background: transparent;
+  box-shadow: none;
+  border: none;
+  transition: all 0.2s ease-in-out;
+}
+.widget-title > button:hover {
+  color: #ffffff;
+  background: transparent;
+  box-shadow: none;
+  text-shadow: 0 0 8px rgba(255, 136, 0, 0.8);
+}
+
+.widget-dnd {
+  font-size: large;
+  color: @border-accent;
+}
+.widget-dnd>switch {
+  background: @border-accent;
+  border-radius: 0;
+}
+.widget-dnd>switch:checked {
+  background: @color-base;
+  border: 1px solid @color-base;
+}
+
+.widget-label>label {
+  font-size: 1rem;
+  color: @text-color;
+  margin: 10px;
+}
+.summary {
+  font-size: 16px;
+  font-weight: 700;
+  background: transparent;
+  color: @border-accent;
+  text-shadow: none;
+}
+.time {
+  font-size: 16px;
+  font-weight: 700;
+  background: transparent;
+  color: @text-color;
+  text-shadow: none;
+  margin-right: 18px;
+}
+.body {
+  font-size: 15px;
+  font-weight: 400;
+  background: transparent;
+  color: @text-color;
+  text-shadow: none;
+}
+
+.widget-buttons-grid {
+  font-size: x-large;
+  margin: 0px 10px;
+  padding: 40px 10px; 
+  padding-left: 30px;
+}
+
+.widget-buttons-grid > flowbox > flowboxchild,
+.widget-buttons-grid > flowbox > flowboxchild:hover,
+.widget-buttons-grid > flowbox > flowboxchild:selected,
+.widget-buttons-grid > flowbox > flowboxchild:focus,
+.widget-buttons-grid > flowbox > flowboxchild:active {
+  background: transparent;
+  box-shadow: none;
+  border: none;
+  outline: none;
+}
+
+.widget-buttons-grid > flowbox > flowboxchild > button {
+  min-width: 90px;
+  min-height: 90px;
+  margin: 0px -10px;
+  padding: 0;
+  
+  background: transparent; 
+  box-shadow: none;
+  border: none; 
+  border-radius: 0;
+  transition: all 0.2s ease-in-out;
+
+  color: transparent; 
+  text-shadow: none;
+  
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.widget-buttons-grid > flowbox > flowboxchild > button:active,
+.widget-buttons-grid > flowbox > flowboxchild > button:hover,
+.widget-buttons-grid > flowbox > flowboxchild > button:checked {
+  background-color: transparent;
+  color: transparent;
+  box-shadow: none;
+  border-color: transparent;
+  text-shadow: none;
+}
+
+.widget-buttons-grid > flowbox > flowboxchild:nth-child(odd) {
+  margin-top: -20px;
+  margin-bottom: 20px;
+}
+.widget-buttons-grid > flowbox > flowboxchild:nth-child(even) {
+  margin-top: 20px;
+  margin-bottom: -20px;
+}
+
+.widget-buttons-grid > flowbox > flowboxchild:nth-child(1) > button { background-image: url("./icons/exit.png"); }
+.widget-buttons-grid > flowbox > flowboxchild:nth-child(1) > button:hover { background-image: url("./icons/exit_hover.png"); }
+
+.widget-buttons-grid > flowbox > flowboxchild:nth-child(2) > button { background-image: url("./icons/mic.png"); }
+.widget-buttons-grid > flowbox > flowboxchild:nth-child(2) > button:hover,
+.widget-buttons-grid > flowbox > flowboxchild:nth-child(2) > button:checked { background-image: url("./icons/mic_hover.png"); }
+
+.widget-buttons-grid > flowbox > flowboxchild:nth-child(3) > button { background-image: url("./icons/wifi.png"); }
+.widget-buttons-grid > flowbox > flowboxchild:nth-child(3) > button:hover,
+.widget-buttons-grid > flowbox > flowboxchild:nth-child(3) > button:checked { background-image: url("./icons/wifi_hover.png"); }
+
+.widget-buttons-grid > flowbox > flowboxchild:nth-child(4) > button { background-image: url("./icons/bluetooth.png"); }
+.widget-buttons-grid > flowbox > flowboxchild:nth-child(4) > button:hover,
+.widget-buttons-grid > flowbox > flowboxchild:nth-child(4) > button:checked { background-image: url("./icons/bluetooth_hover.png"); }
+
+.widget-buttons-grid > flowbox > flowboxchild:nth-child(5) > button { background-image: url("./icons/record.png"); }
+.widget-buttons-grid > flowbox > flowboxchild:nth-child(5) > button:hover { background-image: url("./icons/record_hover.png"); }
+
+.widget-volume,
+.widget-backlight {
+  font-size: 2rem;
+  color: @border-accent;
+}
+
+.widget-mpris,
+.widget-mpris > box,
+.widget-mpris-player,
+.widget-mpris-player > box,
+.widget-mpris-player > box > box {
+  background: transparent;
+  background-color: transparent;
+  box-shadow: none;
+}
+
+.widget-mpris {
+  color: @text-color;
+  margin-top: -45px;
+  margin-bottom: -20px;
+  margin-left: 10px;
+  margin-right: 10px;      
+  padding: 10px 0px;
+}
+
+.widget-mpris-player {
+  border-radius: 0;
+  margin: 0;
+}
+
+.widget-mpris-album-art {
+  border-radius: 0;
+  box-shadow: none;
+  border: none; 
+  margin: 10px;
+}
+
+.widget-mpris-player > box > button {
+  border-radius: 0;
+  box-shadow: none;
+  color: @text-color;
+  background: transparent;
+}
+
+.widget-mpris-player > box > button:hover {
+  color: @border-accent;
+  background: transparent;
+  text-shadow: 0 0 10px rgba(255, 136, 0, 0.8);
+}
+
+picture.mpris-background {
+  opacity: 0;
+}
+
+.close-button {
+  background: @color-base;
+  color: @cc-bg;
+  text-shadow: none;
+  padding: 0;
+  margin-top: 5px;
+  margin-right: 5px;
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+  border-radius: 0;
+  border: none;
+}
+.notification:hover .close-button {
+  opacity: 1;
+}
+.close-button:hover {
+  background: @color-base;
+  box-shadow: none;
+  transition: all 0.15s ease-in-out;
+}
+.notification-action {
+  border: 2px solid @color-accent;
+}
+.notification-action>button {
+  color: @text-color;
+  border-radius: 0px;
+}
+.notification-default-action:hover,
+.notification-action:hover,
+.notification-action>button:hover {
+  color: @color-accent;
+  background: @color-accent;
+}
+
+.inline-reply-entry {
+  background: @color-dark;
+  color: @text-color;
+  caret-color: @text-color;
+  border: 1px solid @color-base;
+}
+.inline-reply-button {
+  margin-top: 4px;
+  margin-left: 4px;
+  background: @color-base;
+  border: 1px solid @color-base;
+  color: @text-color;
+}
+.inline-reply-button:disabled {
+  background: transparent;
+  color: @color-base;
+  border: 1px solid transparent;
+}
+.inline-reply-button:hover {
+  background: @color-base;
+}
+
+scrollbar {
+  background: transparent;
+  width: 4px;
+}
+
+scrollbar slider {
+  background: @border-accent;
+  border-radius: 0px;
+  min-height: 30px;
+}
+
+scrollbar slider:hover {
+  background: white;
+  box-shadow: 0 0 10px @border-accent;
+}
+
+/* ---------------------------------------------------------
+   BOTONES DE GRUPO DE NOTIFICACIONES (Adiós Morado)
+   --------------------------------------------------------- */
+.notification-group > box > button,
+.notification-group-collapse-button,
+.notification-group-close-all-button {
+  background: @color-dark;
+  color: @border-accent;
+  border: 2px solid @color-accent;
+  border-radius: 0px;
+  margin: 5px 2px;
+  box-shadow: none;
+  transition: all 0.2s ease-in-out;
+}
+
+.notification-group > box > button:hover,
+.notification-group-collapse-button:hover,
+.notification-group-close-all-button:hover {
+  background: @color-accent;
+  color: #ffffff;
+  border-color: @border-accent;
+  text-shadow: 0 0 8px rgba(255, 136, 0, 0.8);
+  box-shadow: 0px 0px 15px rgba(255, 136, 0, 0.2);
+}

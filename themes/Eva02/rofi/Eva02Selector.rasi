@@ -1,0 +1,23 @@
+/* --- Selector de Temas Compacto --- */
+@import "Eva02.rasi"
+
+window {
+    width: 300px;      /* Más pequeño que el lanzador full-screen */
+    fullscreen: false; /* Que no ocupe toda la pantalla */
+    location: center;
+}
+
+mainbox {
+    padding: 20px;     /* Menos padding que el lanzador */
+    children: [ "listview" ]; /* Sin inputbar si no quieres buscar, solo elegir */
+}
+
+listview {
+    columns: 1;        /* Lista vertical simple */
+    lines: 5;          /* Espacio para tus temas */
+}
+
+element {
+    orientation: horizontal; /* Texto a la derecha del icono */
+    padding: 15px;
+}

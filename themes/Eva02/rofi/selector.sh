@@ -1,0 +1,1 @@
+rofi -dmenu -i -p "Seleccionar Tema" -theme $HOME/.config/rofi/Eva02Selector.rasi

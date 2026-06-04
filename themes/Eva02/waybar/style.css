@@ -1,0 +1,121 @@
+@define-color bg-dark rgba(21, 9, 9, 0.85); 
+@define-color red-accent #4a1c1c;
+@define-color neon-orange #ff8800;
+@define-color text-color #f2e6e6;
+@define-color text-color-red #d62828;
+@define-color warning-yellow #ffbb00;
+@define-color critical-red #ff0000;
+
+* {
+    font-family: "JetBrainsMono Nerd Font", "Font Awesome 6 Free", sans-serif;
+    font-size: 14px;
+    font-weight: 900;
+    border: none;
+    border-radius: 0;
+}
+
+window#waybar {
+    background-color: @bg-dark;
+    border-bottom: 3px solid @red-accent; 
+    color: #f2e6e6;
+}
+
+.modules-left {
+    background-color: transparent;
+    padding: 0 10px;
+}
+
+.modules-right {
+    background-color: transparent;
+    padding: 0 10px;
+}
+
+#workspaces button {
+    padding: 0 8px;
+    color: @red-accent;
+}
+
+#workspaces button.active {
+    background-color: @red-accent;
+    color: @neon-orange;
+}
+
+#clock, #pulseaudio, #battery, #network, #tray, #window, #custom-notification {
+    padding: 2px 10px;
+    color: @text-color;
+}
+
+tooltip {
+    background-color: @bg-dark; 
+    border: 3px solid @red-accent;
+}
+
+#pulseaudio-slider {
+    padding: 0;
+    margin: 0;
+}
+
+#pulseaudio-slider slider {
+    min-height: 8px;
+    min-width: 8px;
+    padding: 0;
+    margin: 0;
+    background: @neon-orange;
+    border-right: 1px solid @neon-orange;
+    border-left: 1px solid @neon-orange;
+    transition: all 0.2s ease;
+}
+
+#pulseaudio-slider slider:hover {
+    background: #150909;
+}
+
+#pulseaudio-slider trough {
+    min-height: 8px;
+    min-width: 80px;
+    background: #1a0f0f;
+    border: 1px solid @neon-orange;
+}
+
+#pulseaudio-slider highlight {
+    background: @neon-orange;
+}
+
+#battery.warning {
+    color: @bg-dark;
+    background-color: @warning-yellow;
+    border: 2px solid @warning-yellow;
+}
+
+#battery.critical {
+    color: @bg-dark;
+    background-color: @critical-red;
+    border: 2px solid @critical-red;
+    animation: blink 1s steps(2, start) infinite;
+}
+
+@keyframes blink {
+    to {
+        background-color: transparent;
+        color: @critical-red;
+    }
+}
+
+#pulseaudio { color: @neon-orange; }
+#battery { color: @neon-orange; }
+#network { color: @text-color-red; }
+#bluetooth { color: @text-color; }
+
+#custom-wlogout {
+    color: @text-color-red;
+    background-color: transparent;
+    padding: 2px 10px;
+    margin: 0px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+#custom-wlogout:hover {
+    color: @neon-orange;
+    background-color: rgba(74, 28, 28, 0.4);
+}

@@ -1,0 +1,63 @@
+window {
+    font-family: "JetBrainsMono Nerd Font", sans-serif;
+    font-size: 16px;
+    font-weight: 900;
+    background-color: rgba(21, 9, 9, 0.65);
+} 
+
+button {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 97%;
+    color: transparent;
+    background-color: transparent;
+    animation: gradient_f 20s ease-in infinite;
+    transition: all 0.2s ease;
+    
+    border: none;
+    box-shadow: none;
+    border-radius: 0px;
+    
+    min-width: 256px;
+    min-height: 256px;
+
+    margin: 0px;
+
+    margin-left: -60px;
+}
+
+button:focus {
+    box-shadow: none;
+    background-size: 97%;
+}
+
+button:hover {
+    background-size: 100%;
+    background-color: transparent;
+    border: none;
+    color: transparent;
+    transition: all 0.3s cubic-bezier(.55, 0.0, .28, 1.682);
+}
+
+#logout, #suspend {
+    margin-top: 130px; 
+}
+
+#lock, #shutdown, #reboot {
+    margin-bottom: 130px; 
+}
+
+#suspend { background-image: image(url("./icons/suspend.png")); }
+#suspend:hover { background-image: image(url("./icons/suspend_hover.png")); }
+
+#shutdown { background-image: image(url("./icons/shutdown.png")); }
+#shutdown:hover { background-image: image(url("./icons/shutdown_hover.png")); }
+
+#logout { background-image: image(url("./icons/logout.png")); }
+#logout:hover { background-image: image(url("./icons/logout_hover.png")); }
+
+#reboot { background-image: image(url("./icons/reboot.png")); }
+#reboot:hover { background-image: image(url("./icons/reboot_hover.png")); }
+
+#lock { background-image: image(url("./icons/lock.png")); }
+#lock:hover { background-image: image(url("./icons/lock_hover.png")); }

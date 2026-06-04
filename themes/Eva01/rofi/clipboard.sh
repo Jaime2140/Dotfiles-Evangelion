@@ -1,0 +1,1 @@
+cliphist list | rofi -dmenu -display-columns 2 -p "Clipboard" -theme "Eva01.rasi" | cliphist decode | wl-copy
